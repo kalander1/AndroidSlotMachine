@@ -7,12 +7,138 @@
     tools:context="com.example.taha.slotmachine.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/PlayerMoney"
+        android:layout_width="84dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="25dp"
+        android:text="Player Money"
+        app:layout_constraintBottom_toTopOf="@+id/RailTwo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/PlusOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="156dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="43dp"
+        android:text="Add $1"
+        app:layout_constraintBottom_toTopOf="@+id/Restart"
+        app:layout_constraintEnd_toStartOf="@+id/PlusFive"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/PlusFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="249dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="80dp"
+        android:text="Add $5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/PlusTen"
+        app:layout_constraintStart_toEndOf="@+id/PlusOne"
+        app:layout_constraintTop_toBottomOf="@+id/RailTwo" />
+
+    <Button
+        android:id="@+id/PlusTen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="156dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="33dp"
+        android:text="Add $10"
+        app:layout_constraintBottom_toTopOf="@+id/Quit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/PlusFive" />
+
+    <Button
+        android:id="@+id/Restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
+        android:layout_marginStart="43dp"
+        android:text="Restart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Quit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
+        android:layout_marginEnd="27dp"
+        android:text="Quit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/RailOne"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="54dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:text="railOne"
+        app:layout_constraintBottom_toTopOf="@+id/PlusOne"
+        app:layout_constraintEnd_toStartOf="@+id/RailTwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/RailTwo"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="56dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="25dp"
+        android:text="RailTwo"
+        app:layout_constraintBottom_toTopOf="@+id/PlusFive"
+        app:layout_constraintEnd_toStartOf="@+id/RailThree"
+        app:layout_constraintStart_toEndOf="@+id/RailOne"
+        app:layout_constraintTop_toBottomOf="@+id/PlayerMoney" />
+
+    <TextView
+        android:id="@+id/RailThree"
+        android:layout_width="68dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="104dp"
+        android:text="RailThree"
+        app:layout_constraintBottom_toTopOf="@+id/PlusTen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/RailTwo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Bet"
+        android:layout_width="50dp"
+        android:layout_height="17dp"
+        android:layout_marginBottom="88dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginTop="51dp"
+        android:text="Bet"
+        app:layout_constraintBottom_toTopOf="@+id/Quit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PlusTen" />
+
+    <TextView
+        android:id="@+id/WonInRound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="46dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginTop="23dp"
+        android:text="WonInRound"
+        app:layout_constraintBottom_toTopOf="@+id/Quit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Bet" />
 
 </android.support.constraint.ConstraintLayout>
