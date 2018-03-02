@@ -2,9 +2,14 @@ package com.example.taha.slotmachine;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView ReelTwo;
     private TextView ReelThree;
     private TextView playerMoneyText;
+
+    //Gesture
+    private GestureDetector detector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
         ReelTwo = (TextView) findViewById(R.id.RailTwo);
         ReelThree = (TextView)findViewById(R.id.RailThree);
         playerMoneyText = (TextView)findViewById(R.id.PlayerMoney);
+
+        //Gesture detector
+
     }
 
     // Reset the values after the current spin is done for a new spin
@@ -319,4 +330,36 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        int action = event.getAction();
+        switch(action) {
+            case (MotionEvent.ACTION_DOWN) :
+               // Toast.makeText(this,"Action was DOWN",Toast.LENGTH_LONG).show();
+                return true;
+            case (MotionEvent.ACTION_MOVE) :
+                Toast.makeText(this,"Action was MOVE",Toast.LENGTH_LONG).show();
+                return true;
+            case (MotionEvent.ACTION_UP) :
+               // Toast.makeText(this,"Action was UP",Toast.LENGTH_LONG).show();
+                return true;
+            case (MotionEvent.ACTION_CANCEL) :
+                Toast.makeText(this,"Action was CANCEL",Toast.LENGTH_LONG).show();
+                return true;
+            case (MotionEvent.ACTION_OUTSIDE) :
+                Toast.makeText(this,"Movement occurred outside bounds",Toast.LENGTH_LONG).show();
+                return true;
+            case (MotionEvent.ACTION_SCROLL):
+                Toast.makeText(this,"Taha Scroll",Toast.LENGTH_LONG).show();
+                return true;
+            default :
+                return super.onTouchEvent(event);
+        }
+
+       // return super.onTouchEvent(event);
+    }
+
+
 }
