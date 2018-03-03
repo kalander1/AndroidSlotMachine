@@ -1,10 +1,14 @@
 package com.example.taha.slotmachine;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         //Creating Buttons
@@ -313,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
             Bet.setText(String.valueOf(playerBet));
         }
     }
-    //Plus one to the bet money
+    //Restart defautl values
     private class restartBtnListener implements View.OnClickListener{
         @Override
         public void onClick(View v)
@@ -341,6 +349,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case (MotionEvent.ACTION_MOVE) :
                 Toast.makeText(this,"Action was MOVE",Toast.LENGTH_LONG).show();
+               // playerMoneyText.setText(String.valueOf(event.getRawX())); -->> gets the input position at a given move
                 return true;
             case (MotionEvent.ACTION_UP) :
                // Toast.makeText(this,"Action was UP",Toast.LENGTH_LONG).show();
