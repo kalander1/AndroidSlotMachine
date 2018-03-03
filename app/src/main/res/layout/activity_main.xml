@@ -13,19 +13,27 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/mainbackground" />
 
     <TextView
         android:id="@+id/PlayerMoney"
         android:layout_width="84dp"
         android:layout_height="19dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="108dp"
         android:text="Player Money"
-        tools:layout_editor_absoluteX="284dp"
-        tools:layout_editor_absoluteY="111dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.03"
         tools:textColor="@android:color/background_light" />
 
     <Button
@@ -84,40 +92,56 @@
         android:id="@+id/RailOne"
         android:layout_width="69dp"
         android:layout_height="35dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="140dp"
         android:text="railOne"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="140dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/RailTwo"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="140dp"
         android:text="RailTwo"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="140dp" />
+        app:layout_constraintStart_toEndOf="@+id/RailOne"
+        app:layout_constraintTop_toTopOf="@+id/MainBackGround" />
 
     <TextView
         android:id="@+id/RailThree"
         android:layout_width="68dp"
         android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="140dp"
         android:text="RailThree"
-        tools:layout_editor_absoluteX="200dp"
-        tools:layout_editor_absoluteY="140dp" />
+        app:layout_constraintStart_toEndOf="@+id/RailTwo"
+        app:layout_constraintTop_toTopOf="@+id/MainBackGround" />
 
     <TextView
         android:id="@+id/Bet"
         android:layout_width="50dp"
         android:layout_height="17dp"
+        android:layout_marginBottom="384dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="Bet"
-        tools:layout_editor_absoluteX="318dp"
-        tools:layout_editor_absoluteY="189dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.884"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/WonInRound"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginBottom="416dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="18dp"
         android:text="WonInRound"
-        tools:layout_editor_absoluteX="289dp"
-        tools:layout_editor_absoluteY="156dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/RailThree" />
 
 </android.support.constraint.ConstraintLayout>
