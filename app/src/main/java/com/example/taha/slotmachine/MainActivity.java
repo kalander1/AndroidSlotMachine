@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView ReelTwo;
     private TextView ReelThree;
     private TextView playerMoneyText;
-
+    private TextView jackPotText;
+    private TextView wonInRoundText;
     //Gesture
     private GestureDetector detector;
 
@@ -76,11 +77,16 @@ public class MainActivity extends AppCompatActivity {
 
         //Messing with text
         Bet = (TextView) findViewById(R.id.Bet);
+        Bet.setText(String.valueOf(playerBet));
         ReelOne = (TextView)findViewById(R.id.RailOne);
         ReelTwo = (TextView) findViewById(R.id.RailTwo);
         ReelThree = (TextView)findViewById(R.id.RailThree);
         playerMoneyText = (TextView)findViewById(R.id.PlayerMoney);
-
+        playerMoneyText.setText(String.valueOf(playerMoney));
+        jackPotText = (TextView)findViewById(R.id.jackPot);
+        jackPotText.setText(String.valueOf(jackpot));
+        wonInRoundText = (TextView)findViewById(R.id.WonInRound);
+        wonInRoundText.setText(String.valueOf(wonInRound));
         //Gesture detector
 
     }
@@ -108,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
         playerMoneyText.setText(String.valueOf(playerMoney));
         Bet.setText(String.valueOf(playerBet));
+        jackPotText.setText(String.valueOf(jackpot));
     }
 
     // Check if the player won the jackpot
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             //Add Jackpot text change to "You won the jack pot"
             playerMoney +=  jackpot;
             jackpot = 500;
+            jackPotText.setText(String.valueOf(jackpot));
         }
     }
 
@@ -130,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         resetFruitTally();
         checkJackPot();
         playerMoneyText.setText(String.valueOf(playerMoney));
+        wonInRoundText.setText(String.valueOf(wonInRound));
     }
 
     // If lost subtract the bet from player money

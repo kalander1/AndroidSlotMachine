@@ -112,9 +112,12 @@
         android:id="@+id/RailThree"
         android:layout_width="68dp"
         android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="140dp"
         android:text="RailThree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/RailTwo"
         app:layout_constraintTop_toTopOf="@+id/MainBackGround" />
 
@@ -135,13 +138,26 @@
         android:id="@+id/WonInRound"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:layout_marginBottom="416dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginBottom="408dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginTop="8dp"
         android:text="WonInRound"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/RailThree" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.925" />
+
+    <TextView
+        android:id="@+id/jackPot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginTop="228dp"
+        android:text="Jackpot"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.035" />
 
 </android.support.constraint.ConstraintLayout>
