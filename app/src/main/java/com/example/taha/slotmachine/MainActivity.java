@@ -1,9 +1,16 @@
 package com.example.taha.slotmachine;
 
 import android.content.pm.ActivityInfo;
+import android.gesture.Gesture;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,12 +18,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private int playerMoney = 100;   // Player current money
     private int playerBet = 0;       // What the player is betting in the current turn
@@ -42,8 +50,33 @@ public class MainActivity extends AppCompatActivity {
     private TextView playerMoneyText;
     private TextView jackPotText;
     private TextView wonInRoundText;
+
+    //Lever sprites
+    private ImageView leverOne;
+    private ImageView leverTwo;
+    private ImageView leverThree;
     //Gesture
-    private GestureDetector detector;
+   // private  GestureDetectorCompat detector;
+
+    //Reel Images
+    private int ReelImages[] = {R.drawable.blank, R.drawable.grapes, R.drawable.bananas, R.drawable.oranges, R.drawable.cherries, R.drawable.bars, R.drawable.bells, R.drawable.seven};
+
+    //Image view reference to reel images
+    private ImageView reelOneImg;
+    private ImageView reelTwoImg;
+    private ImageView reelThreeImg;
+    //Holder for the reel Images
+    private ImageView reelImgArray[] = new ImageView[3];
+
+    //X and Y position for lever
+    float xInitial;
+    float yInitial;
+    float xFinal;
+    float yFinal;
+
+    //Screen Height and Width
+    int height;
+    int width;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,16 +113,31 @@ public class MainActivity extends AppCompatActivity {
         //Messing with text
         Bet = (TextView) findViewById(R.id.Bet);
         Bet.setText(String.valueOf(playerBet));
-        ReelOne = (TextView)findViewById(R.id.RailOne);
-        ReelTwo = (TextView) findViewById(R.id.RailTwo);
-        ReelThree = (TextView)findViewById(R.id.RailThree);
+       // ReelOne = (TextView)findViewById(R.id.RailOne);
+       // ReelTwo = (TextView) findViewById(R.id.RailTwo);
+       // ReelThree = (TextView)findViewById(R.id.RailThree);
         playerMoneyText = (TextView)findViewById(R.id.PlayerMoney);
         playerMoneyText.setText(String.valueOf(playerMoney));
         jackPotText = (TextView)findViewById(R.id.jackPot);
         jackPotText.setText(String.valueOf(jackpot));
         wonInRoundText = (TextView)findViewById(R.id.WonInRound);
         wonInRoundText.setText(String.valueOf(wonInRound));
-        //Gesture detector
+
+        //Lever Images
+        leverOne = (ImageView)findViewById(R.id.leverOne);
+        leverTwo = (ImageView)findViewById(R.id.leverTwo);
+
+        //Reel images
+        reelOneImg = (ImageView)findViewById(R.id.FirstReelImg);
+        reelTwoImg = (ImageView)findViewById(R.id.secondReelImg);
+        reelThreeImg = (ImageView)findViewById(R.id.thirdReelImg);
+
+        reelImgArray[0] = reelOneImg;
+        reelImgArray[1] = reelTwoImg;
+        reelImgArray[2] = reelThreeImg;
+
+        height = getResources().getDisplayMetrics().heightPixels;
+        width  = getResources().getDisplayMetrics().widthPixels;
 
     }
 
@@ -176,41 +224,49 @@ public class MainActivity extends AppCompatActivity {
             if(outCome[spin] == checkRange(outCome[spin],1,27))// 41.5% probability
             {
                 blanks++;
+                reelImgArray[spin].setImageResource(ReelImages[0]);
                 spinResult[spin] = "blank";
             }
             else if(outCome[spin] == checkRange(outCome[spin], 28, 37)) // 15.4% probability
             {
                 grapes++;
+                reelImgArray[spin].setImageResource(ReelImages[1]);
                 spinResult[spin] = "Grapes";
             }
             else if(outCome[spin] == checkRange(outCome[spin], 38, 46)) // 13.8% probability )
             {
                 bananas++;
+                reelImgArray[spin].setImageResource(ReelImages[2]);
                 spinResult[spin] = "Banana";
             }
             else if(outCome[spin] == checkRange(outCome[spin], 47,54))  // 12.3% probability
             {
                 oranges++;
+                reelImgArray[spin].setImageResource(ReelImages[3]);
                 spinResult[spin] = "Orange";
             }
             else if(outCome[spin] == checkRange(outCome[spin], 55,59))// 7.7% probability
             {
                 cherries++;
+                reelImgArray[spin].setImageResource(ReelImages[4]);
                 spinResult[spin] = "Cherry";
             }
             else if(outCome[spin] == checkRange(outCome[spin], 60,62))// 4.6% probability
             {
                 bars++;
+                reelImgArray[spin].setImageResource(ReelImages[5]);
                 spinResult[spin] = "Bar";
             }
             else if(outCome[spin] == checkRange(outCome[spin], 63,64))// 3.1% probability
             {
                 bells++;
+                reelImgArray[spin].setImageResource(ReelImages[6]);
                 spinResult[spin] = "Bell";
             }
             else if(outCome[spin] == checkRange(outCome[spin], 65,65))// 1.5% probability
             {
                 sevens++;
+                reelImgArray[spin].setImageResource(ReelImages[7]);
                 spinResult[spin] = "Seven";
             }
         }
@@ -293,9 +349,9 @@ public class MainActivity extends AppCompatActivity {
         {
             Reels();
             fruits = spinResult[0] + " - " +spinResult[1] +" - "+spinResult[2];
-            ReelOne.setText(spinResult[0]);
-            ReelTwo.setText(spinResult[1]);
-            ReelThree.setText(spinResult[2]);
+            //ReelOne.setText(spinResult[0]);
+           // ReelTwo.setText(spinResult[1]);
+           // ReelThree.setText(spinResult[2]);
             determineWinnings();
         }
         else
@@ -303,6 +359,7 @@ public class MainActivity extends AppCompatActivity {
             //Please enter a valid bet amount
         }
     }
+
     //Plus one to the bet money
     private class plusOneBtnListener implements View.OnClickListener{
         @Override
@@ -350,6 +407,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -357,22 +415,25 @@ public class MainActivity extends AppCompatActivity {
         switch(action) {
             case (MotionEvent.ACTION_DOWN) :
                // Toast.makeText(this,"Action was DOWN",Toast.LENGTH_LONG).show();
+                xInitial = event.getRawX();
+                yInitial = event.getRawY();
+               // Bet.setText(String.valueOf( height));
+                //xFinal;
+               // yFinal;
+
                 return true;
             case (MotionEvent.ACTION_MOVE) :
-                Toast.makeText(this,"Action was MOVE",Toast.LENGTH_LONG).show();
+             //   Toast.makeText(this,"Action was MOVE",Toast.LENGTH_LONG).show();
+                leverOne.setVisibility(View.INVISIBLE);
+                leverTwo.setVisibility(View.VISIBLE);
                // playerMoneyText.setText(String.valueOf(event.getRawX())); -->> gets the input position at a given move
                 return true;
             case (MotionEvent.ACTION_UP) :
-               // Toast.makeText(this,"Action was UP",Toast.LENGTH_LONG).show();
-                return true;
-            case (MotionEvent.ACTION_CANCEL) :
-                Toast.makeText(this,"Action was CANCEL",Toast.LENGTH_LONG).show();
-                return true;
-            case (MotionEvent.ACTION_OUTSIDE) :
-                Toast.makeText(this,"Movement occurred outside bounds",Toast.LENGTH_LONG).show();
+                leverOne.setVisibility(View.VISIBLE);
+                leverTwo.setVisibility(View.INVISIBLE);
                 return true;
             case (MotionEvent.ACTION_SCROLL):
-                Toast.makeText(this,"Taha Scroll",Toast.LENGTH_LONG).show();
+               Toast.makeText(this,"Taha Scroll",Toast.LENGTH_LONG).show();
                 return true;
             default :
                 return super.onTouchEvent(event);
