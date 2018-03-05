@@ -1,26 +1,18 @@
 package com.example.taha.slotmachine;
 
 import android.content.pm.ActivityInfo;
-import android.gesture.Gesture;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v7.app.ActionBar;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 
 
@@ -69,14 +61,15 @@ public class MainActivity extends AppCompatActivity  {
     private ImageView reelImgArray[] = new ImageView[3];
 
     //X and Y position for lever
-    float xInitial;
-    float yInitial;
-    float xFinal;
-    float yFinal;
+    private float xInitial;
+    private float yInitial;
+    private float xFinal;
+    private float yFinal;
+    private boolean rightPosition = false;
 
     //Screen Height and Width
-    int height;
-    int width;
+    private int height;
+    private int width;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -349,9 +342,6 @@ public class MainActivity extends AppCompatActivity  {
         {
             Reels();
             fruits = spinResult[0] + " - " +spinResult[1] +" - "+spinResult[2];
-            //ReelOne.setText(spinResult[0]);
-           // ReelTwo.setText(spinResult[1]);
-           // ReelThree.setText(spinResult[2]);
             determineWinnings();
         }
         else
@@ -367,8 +357,6 @@ public class MainActivity extends AppCompatActivity  {
         {
             playerBet ++;
             Bet.setText(String.valueOf(playerBet));
-            Spin();
-
         }
     }
     //Plus five to the bet money
@@ -417,18 +405,75 @@ public class MainActivity extends AppCompatActivity  {
                // Toast.makeText(this,"Action was DOWN",Toast.LENGTH_LONG).show();
                 xInitial = event.getRawX();
                 yInitial = event.getRawY();
-               // Bet.setText(String.valueOf( height));
-                //xFinal;
-               // yFinal;
 
+                if( xInitial >= ((width * 0.92) - 200) && (yInitial >= (height * 0.50 - 300) && (yInitial <= (height* 0.50 - 50))) )
+                {
+                    rightPosition = true;
+                }
                 return true;
             case (MotionEvent.ACTION_MOVE) :
              //   Toast.makeText(this,"Action was MOVE",Toast.LENGTH_LONG).show();
-                leverOne.setVisibility(View.INVISIBLE);
-                leverTwo.setVisibility(View.VISIBLE);
-               // playerMoneyText.setText(String.valueOf(event.getRawX())); -->> gets the input position at a given move
+                xFinal = event.getRawX();
+                yFinal = event.getRawY();
+
+                if(xFinal < (xInitial - 150))
+                {
+                    rightPosition = false;
+                }
+                else if((xFinal >= xInitial) && yFinal > (yInitial + 100) && rightPosition)
+                {
+                    leverOne.setVisibility(View.INVISIBLE);
+                    leverTwo.setVisibility(View.VISIBLE);
+
+                    rightPosition = false;
+                    Handler  handler = new Handler();
+
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reelImgArray[0].setImageResource(ReelImages[1]);
+                            reelImgArray[1].setImageResource(ReelImages[2]);
+                            reelImgArray[2].setImageResource(ReelImages[3]);
+                        }
+                    }, 200);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reelImgArray[0].setImageResource(ReelImages[4]);
+                            reelImgArray[1].setImageResource(ReelImages[5]);
+                            reelImgArray[2].setImageResource(ReelImages[6]);
+                        }
+                    }, 400);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reelImgArray[0].setImageResource(ReelImages[7]);
+                            reelImgArray[1].setImageResource(ReelImages[0]);
+                            reelImgArray[2].setImageResource(ReelImages[2]);
+                        }
+                    }, 600);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reelImgArray[0].setImageResource(ReelImages[3]);
+                            reelImgArray[1].setImageResource(ReelImages[1]);
+                            reelImgArray[2].setImageResource(ReelImages[7]);
+                        }
+                    }, 800);
+
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Spin();
+                        }
+                    }, 1000);
+
+
+                }
                 return true;
             case (MotionEvent.ACTION_UP) :
+
+                rightPosition = false;
                 leverOne.setVisibility(View.VISIBLE);
                 leverTwo.setVisibility(View.INVISIBLE);
                 return true;
@@ -441,6 +486,5 @@ public class MainActivity extends AppCompatActivity  {
 
        // return super.onTouchEvent(event);
     }
-
 
 }
