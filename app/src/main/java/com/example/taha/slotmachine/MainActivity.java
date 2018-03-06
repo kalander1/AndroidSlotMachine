@@ -2,6 +2,7 @@ package com.example.taha.slotmachine;
 
 import android.content.pm.ActivityInfo;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 
 
@@ -71,6 +73,12 @@ public class MainActivity extends AppCompatActivity  {
     private int height;
     private int width;
 
+
+    //alerts
+    AlertDialog.Builder noMoney;
+    AlertDialog.Builder zeroBet;
+    AlertDialog.Builder wonTheJackpot;
+    AlertDialog.Builder zeroMoney;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -158,6 +166,7 @@ public class MainActivity extends AppCompatActivity  {
         playerMoneyText.setText(String.valueOf(playerMoney));
         Bet.setText(String.valueOf(playerBet));
         jackPotText.setText(String.valueOf(jackpot));
+        wonInRoundText.setText(String.valueOf(wonInRound));
     }
 
     // Check if the player won the jackpot
@@ -171,6 +180,12 @@ public class MainActivity extends AppCompatActivity  {
             playerMoney +=  jackpot;
             jackpot = 500;
             jackPotText.setText(String.valueOf(jackpot));
+
+            wonTheJackpot = new AlertDialog.Builder(this);
+            wonTheJackpot.setTitle("You Won The JACKPOT!!");
+            // zeroBet.setMessage("");
+            wonTheJackpot.setPositiveButton("OK",null);
+            wonTheJackpot.show();
         }
     }
 
@@ -182,6 +197,8 @@ public class MainActivity extends AppCompatActivity  {
         checkJackPot();
         playerMoneyText.setText(String.valueOf(playerMoney));
         wonInRoundText.setText(String.valueOf(wonInRound));
+        playerBet = 0;
+        Bet.setText(String.valueOf(playerBet));
     }
 
     // If lost subtract the bet from player money
@@ -190,6 +207,8 @@ public class MainActivity extends AppCompatActivity  {
         playerMoney -= playerBet;
         resetFruitTally();
         playerMoneyText.setText(String.valueOf(playerMoney));
+        playerBet = 0;
+        Bet.setText(String.valueOf(playerBet));
     }
 
     // Check if the value falls withing a range
@@ -330,14 +349,40 @@ public class MainActivity extends AppCompatActivity  {
     {
         //playerBet = resultButton;
 
-        if(playerMoney == 0)
+        if(playerMoney <= 0)
         {
             //Add on screen message with an option to restart
+            zeroMoney = new AlertDialog.Builder(this);
+            zeroMoney.setTitle("You Lose!");
+            zeroMoney.setMessage("Restart Game?");
+            zeroMoney.setPositiveButton("Restart",null);
+            zeroMoney.show();
+           resetAll();
         }
+
         else if(playerBet > playerMoney)
         {
+            noMoney = new AlertDialog.Builder(this);
+            noMoney.setTitle("Not Enough Money!");
+            //noMoney.setMessage("");
+            noMoney.setPositiveButton("OK",null);
+            noMoney.show();
+            playerBet = 0;
+            Bet.setText(String.valueOf(playerBet));
             //Add on screen massage you are poor
         }
+        else if(playerBet == 0)
+        {
+            zeroBet = new AlertDialog.Builder(this);
+            zeroBet.setTitle("Please Make a Bet!");
+           // zeroBet.setMessage("");
+            zeroBet.setPositiveButton("OK",null);
+            zeroBet.show();
+            playerBet = 0;
+            Bet.setText(String.valueOf(playerBet));
+
+        }
+
         else if(playerBet <= playerMoney)
         {
             Reels();
@@ -486,5 +531,6 @@ public class MainActivity extends AppCompatActivity  {
 
        // return super.onTouchEvent(event);
     }
+
 
 }
