@@ -1,3 +1,13 @@
+/*
+Source File:   MainActivity
+Authors & IDs: Taha Saleem     100803048\
+               Ivan Echavarria 101092562
+Creation Date: 02/03/2018
+
+
+File Description: it's our Main activity
+
+*/
 package com.example.taha.slotmachine;
 
 import android.content.pm.ActivityInfo;
@@ -229,6 +239,18 @@ public class MainActivity extends AppCompatActivity  {
         wonInRoundText.setText(String.valueOf(wonInRound));
         playerBet = 0;
         Bet.setText(String.valueOf(playerBet));
+
+        if(playerMoney <= 0)
+        {
+            //Add on screen message with an option to restart
+            zeroMoney = new AlertDialog.Builder(this);
+            zeroMoney.setTitle("You Lose!");
+            zeroMoney.setMessage("Restarting Game");
+            zeroMoney.setPositiveButton("OK",null);
+            zeroMoney.show();
+            resetAll();
+        }
+
     }
 
     // Check if the value falls withing a range
@@ -367,20 +389,8 @@ public class MainActivity extends AppCompatActivity  {
     }
     private void Spin()
     {
-        //playerBet = resultButton;
 
-        if(playerMoney <= 0)
-        {
-            //Add on screen message with an option to restart
-            zeroMoney = new AlertDialog.Builder(this);
-            zeroMoney.setTitle("You Lose!");
-            zeroMoney.setMessage("Restart Game?");
-            zeroMoney.setPositiveButton("Restart",null);
-            zeroMoney.show();
-           resetAll();
-        }
-
-        else if(playerBet > playerMoney)
+        if(playerBet > playerMoney)
         {
             noMoney = new AlertDialog.Builder(this);
             noMoney.setTitle("Not Enough Money!");
@@ -454,7 +464,7 @@ public class MainActivity extends AppCompatActivity  {
             resetAll();
         }
     }
-
+    //quit game
     private class quitButtonListener implements View.OnClickListener
     {
         @Override
@@ -465,7 +475,8 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-
+    //this function is charge of lever, so it checks if the input in range of the lever image to
+    // apply the animation and also calls the spin function
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
