@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity  {
     private MediaPlayer jackPotSound;
     private MediaPlayer leverPull;
     private MediaPlayer wheelspin;
+    private MediaPlayer backgroundmusic;
 
 
     //alerts
@@ -153,6 +154,9 @@ public class MainActivity extends AppCompatActivity  {
         jackPotSound= MediaPlayer.create(this, R.raw.jackpot);
         leverPull= MediaPlayer.create(this, R.raw.leverpull);
         wheelspin= MediaPlayer.create(this, R.raw.wheelspin);
+        backgroundmusic = MediaPlayer.create(this,R.raw.backgroundmusic);
+        backgroundmusic.start();
+        backgroundmusic.isLooping();
     }
 
     // Reset the values after the current spin is done for a new spin
@@ -219,8 +223,10 @@ public class MainActivity extends AppCompatActivity  {
     private void lost()
     {
         playerMoney -= playerBet;
+        wonInRound = 0;
         resetFruitTally();
         playerMoneyText.setText(String.valueOf(playerMoney));
+        wonInRoundText.setText(String.valueOf(wonInRound));
         playerBet = 0;
         Bet.setText(String.valueOf(playerBet));
     }
