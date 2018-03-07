@@ -1,7 +1,9 @@
 package com.example.taha.slotmachine;
 
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -73,6 +75,12 @@ public class MainActivity extends AppCompatActivity  {
     private int height;
     private int width;
 
+    // Sounds
+    private MediaPlayer buttonClick;
+    private MediaPlayer jackPotSound;
+    private MediaPlayer leverPull;
+    private MediaPlayer wheelspin;
+
 
     //alerts
     AlertDialog.Builder noMoney;
@@ -140,6 +148,11 @@ public class MainActivity extends AppCompatActivity  {
         height = getResources().getDisplayMetrics().heightPixels;
         width  = getResources().getDisplayMetrics().widthPixels;
 
+        //Create Sounds
+        buttonClick = MediaPlayer.create(this, R.raw.buttonclick);
+        jackPotSound= MediaPlayer.create(this, R.raw.jackpot);
+        leverPull= MediaPlayer.create(this, R.raw.leverpull);
+        wheelspin= MediaPlayer.create(this, R.raw.wheelspin);
     }
 
     // Reset the values after the current spin is done for a new spin
@@ -176,6 +189,7 @@ public class MainActivity extends AppCompatActivity  {
         int  jackPotWin = (int)Math.floor(Math.random()* 51 +1);
         if(jackPotTry == jackPotWin)
         {
+            jackPotSound.start();
             //Add Jackpot text change to "You won the jack pot"
             playerMoney +=  jackpot;
             jackpot = 500;
@@ -401,6 +415,7 @@ public class MainActivity extends AppCompatActivity  {
         public void onClick(View v)
         {
             playerBet ++;
+            buttonClick.start();
             Bet.setText(String.valueOf(playerBet));
         }
     }
@@ -410,6 +425,7 @@ public class MainActivity extends AppCompatActivity  {
         public void onClick(View v)
         {
             playerBet += 5;
+            buttonClick.start();
             Bet.setText(String.valueOf(playerBet));
         }
     }
@@ -419,6 +435,7 @@ public class MainActivity extends AppCompatActivity  {
         public void onClick(View v)
         {
             playerBet += 10;
+            buttonClick.start();
             Bet.setText(String.valueOf(playerBet));
         }
     }
@@ -427,6 +444,7 @@ public class MainActivity extends AppCompatActivity  {
         @Override
         public void onClick(View v)
         {
+            buttonClick.start();
             resetAll();
         }
     }
@@ -436,6 +454,7 @@ public class MainActivity extends AppCompatActivity  {
         @Override
         public void onClick(View v)
         {
+            buttonClick.start();
             finish();
         }
     }
@@ -470,6 +489,9 @@ public class MainActivity extends AppCompatActivity  {
                     leverOne.setVisibility(View.INVISIBLE);
                     leverTwo.setVisibility(View.VISIBLE);
 
+                    leverPull.start();
+
+
                     rightPosition = false;
                     Handler  handler = new Handler();
 
@@ -479,6 +501,8 @@ public class MainActivity extends AppCompatActivity  {
                             reelImgArray[0].setImageResource(ReelImages[1]);
                             reelImgArray[1].setImageResource(ReelImages[2]);
                             reelImgArray[2].setImageResource(ReelImages[3]);
+                            wheelspin.seekTo(0);
+                            wheelspin.start();
                         }
                     }, 200);
                     handler.postDelayed(new Runnable() {
@@ -505,13 +529,47 @@ public class MainActivity extends AppCompatActivity  {
                             reelImgArray[2].setImageResource(ReelImages[7]);
                         }
                     }, 800);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reelImgArray[0].setImageResource(ReelImages[1]);
+                            reelImgArray[1].setImageResource(ReelImages[2]);
+                            reelImgArray[2].setImageResource(ReelImages[3]);
+                            wheelspin.start();
+                        }
+                    }, 1000);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reelImgArray[0].setImageResource(ReelImages[4]);
+                            reelImgArray[1].setImageResource(ReelImages[5]);
+                            reelImgArray[2].setImageResource(ReelImages[6]);
+                        }
+                    }, 1200);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reelImgArray[0].setImageResource(ReelImages[7]);
+                            reelImgArray[1].setImageResource(ReelImages[0]);
+                            reelImgArray[2].setImageResource(ReelImages[2]);
+                        }
+                    }, 1400);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            reelImgArray[0].setImageResource(ReelImages[3]);
+                            reelImgArray[1].setImageResource(ReelImages[1]);
+                            reelImgArray[2].setImageResource(ReelImages[7]);
+                        }
+                    }, 1600);
 
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
+                            wheelspin.pause();
                             Spin();
                         }
-                    }, 1000);
+                    }, 1800);
 
 
                 }
