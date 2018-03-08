@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,21 +20,21 @@
 
     <TextView
         android:id="@+id/PlayerMoney"
-        android:layout_width="48dp"
-        android:layout_height="15dp"
+        android:layout_width="50dp"
+        android:layout_height="17dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="8dp"
         android:text="Player Money"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.029"
+        app:layout_constraintVertical_bias="0.19999999"
         tools:textColor="@android:color/background_light" />
 
     <Button
@@ -108,28 +107,28 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.32999998" />
 
     <TextView
         android:id="@+id/WonInRound"
-        android:layout_width="wrap_content"
-        android:layout_height="16dp"
-        android:layout_marginBottom="408dp"
-        android:layout_marginEnd="28dp"
+        android:layout_width="50dp"
+        android:layout_height="17dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="WonInRound"
+        android:text="Won"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.26999998" />
 
     <TextView
         android:id="@+id/jackPot"
@@ -214,5 +213,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.232"
         app:srcCompat="@drawable/blank" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
 </android.support.constraint.ConstraintLayout>
